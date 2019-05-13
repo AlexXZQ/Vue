@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>条件渲染</title>
+    <script src="vue-2.5.16.js"></script>
+    <style>
+        ul{
+            margin: 0px;
+            padding: 0px;
+            font-size: 14px;
+        }
+        li{
+            margin-top: 10px;
+            width: 240px;
+        }
+        .inp{
+            width: 240px;
+        }
+        li a{
+            float: right;
+            padding:0 5px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+
+        <h2>to do list</h2>
+        <input type="text" class="inp" v-model="inp"> <input type="button" value="增加" @click="add">
+        <ul>
+            <li v-for="v,k in datalist">
+                {{ v }}
+                <a href="#" @click="up(k)">↑</a>
+                <a href="#" @click="down(k)">↓</a>
+                <a href="#" @click="del(k)">删除</a>
+            </li>
+        </ul>
+
+    </div>
+
+
+    <script>
+        //1、绑给input输入框双向绑定一个变量
+        //2、给增加绑定一个点击事件
+        var vue = new Vue({
+            el: '.box',
+            data: {
+                datalist: ['学习html', '学习css', '学习javascript'],
+                inp: ''
+            },
+            methods:{
+                add: function(){
+                    this.datalist.push(this.inp)
+                },
+                del: function(k){
+                    this.datalist.splice(k, 1)
+                },
+                up: function(k){
+                    if(k==0){
+                        return;
+                    }
+                    var r = this.datalist.splice(k, 1)
+                    this.datalist.splice(k-1, 0, r[0])
+                },
+                down: function(k){
+                    if(k==this.datalist.length-1){
+                        return;
+                    }
+                    var r = this.datalist.splice(k, 1)
+                    this.datalist.splice(k+1, 0, r[0])
+                }
+            }
+        })
+    </script>
+</body>
+</html>
+
+
+<!--
+上移
+a = ['a', 'b', 'c', 'd']
+a = ['a', 'c', 'b', 'd']
+
+1、把c这个内容拿出来
+res = a.splice(index, 1)
+
+2、获取c前面的索引值，把c放入到前面的索引值中
+a.splice(index-1, 0, res)
+
+
+下移
+a = ['a', 'b', 'c', 'd']
+a = ['a', 'c', 'b', 'd']
+
+['a', 'c', 'd']
+
+1、把b这个内容拿出来
+res = a.splice(index, 1)
+
+2、获取b后面的索引值，把b放入到后面的索引值中
+a.splice(index+1, 0, res)
+-->
