@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>修改属性</title>
+    <script src="vue-2.5.16.js"></script>
+    <script>
+        window.onload = function () {
+            var vm = new Vue({
+                el:'.box',
+                data:{
+                    content:'操作属性',
+                    linkdata:'百度链接',
+                    url:'http://www.baidu.com'
+                }
+            })
+        }
+    </script>
+</head>
+<body>
+<div class="box">
+    <a :href="url" target="_blank">{{linkdata}}</a>
+    <p>{{content}}</p>
+</div>
+</body>
+</html>

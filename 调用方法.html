@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>调用方法</title>
+    <script src="vue-2.5.16.js"></script>
+    <script>
+        window.onload = function () {
+            var vm = new Vue({
+                el:'.box',
+                data:{
+                    content:'操作属性',
+                    linkdata:'百度链接',
+                    url:'http://www.baidu.com',
+                    count:0
+                },
+                methods:{
+                    fnAddClick:function () {
+                        this.count += 1;
+                    }
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+<div class="box">
+    <button @click='fnAddClick'>计数器:{{count}}</button>
+    <a :href="url" target="_blank">{{linkdata}}</a>
+    <p>{{content}}</p>
+</div>
+</body>
+</html>
